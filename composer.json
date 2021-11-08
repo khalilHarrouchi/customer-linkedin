@@ -1,5 +1,5 @@
 {
-    "name": "khalilHarrouchi/customer-linkedin",
+    "name": "magentotest/customer-linkedin",
     "description": "A Magento 2 module that creates an attribute Linkedin profile for Customer ",
     "type": "magento2-module",
     "version": "1.0.0",
