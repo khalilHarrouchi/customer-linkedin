@@ -11,7 +11,7 @@
                     value="<?= $myCustomAttribute->getValue(); ?>"
                    <?php } ?>
                    title="<?php /* @escapeNotVerified */ echo __('Linkedin profile') ?>" class="input-text"
-                   data-validate='{"required":true, "maxlength":250}'
+                   data-validate='{"required":true, "url": true, "maxlength":250}'
             />
         </div>
     </div>
