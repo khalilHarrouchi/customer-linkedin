@@ -16,7 +16,7 @@
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
-            "Magento\\CustomerLinkedin\\": ""
+            "MagentoTest\\CustomerLinkedin\\": ""
         }
     }
 }
