@@ -8,7 +8,7 @@
         "AFL-3.0"
     ],
     "require": {
-        "php": "~7.2.0||~7.3.0",
+        "php": ">=7.2.0",
         "magento/framework": "~100.0.4",
         "magento/module-customer": "103.0.*"
     },
