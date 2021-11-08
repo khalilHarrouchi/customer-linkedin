@@ -9,8 +9,8 @@
     ],
     "require": {
         "php": ">=7.2.0",
-        "magento/framework": "~100.0.4",
-        "magento/module-customer": "103.0.*"
+        "magento/framework": "*",
+        "magento/module-customer": "*"
     },
     "minimum-stability": "stable",
     "autoload": {
