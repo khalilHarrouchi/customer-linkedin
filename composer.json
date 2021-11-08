@@ -12,6 +12,7 @@
         "magento/framework": "~100.0.4",
         "magento/module-customer": "103.0.*"
     },
+    "minimum-stability": "stable",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
