@@ -2,15 +2,18 @@
 namespace MagentoTest\CustomerLinkedin\Setup\Patch\Data;
 
 use Magento\Customer\Model\Customer;
-use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Eav\Model\Entity\Attribute\Set;
 use Magento\Customer\Setup\CustomerSetupFactory;
-use Magento\Eav\Model\Config;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Eav\Model\Entity\Attribute\SetFactory;
 use Magento\Customer\Model\ResourceModel\Attribute as CustomerAttributeResourceModel;
+use Zend_Validate_Exception;
 
+/**
+ * @codeCoverageIgnore
+ */
 class AddLinkedinAttribute implements DataPatchInterface
 {
     /** @var ModuleDataSetupInterface */
@@ -18,10 +21,6 @@ class AddLinkedinAttribute implements DataPatchInterface
 
     /** @var EavSetupFactory */
     private $eavSetupFactory;
-    /**
-     * @var Config
-     */
-    private Config $eavConfig;
     /**
      * @var CustomerAttributeResourceModel
      */
@@ -33,22 +32,19 @@ class AddLinkedinAttribute implements DataPatchInterface
 
     /**
      * @param ModuleDataSetupInterface $moduleDataSetup
-     * @param EavSetupFactory $eavSetupFactory
-     * @param Config $eavConfig
+     * @param CustomerAttributeResourceModel $customerAttributeResourceModel
+     * @param CustomerSetupFactory $customerSetupFactory
+     * @param SetFactory $attributeSetFactory
      */
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
-        EavSetupFactory $eavSetupFactory,
-        Config $eavConfig,
         CustomerAttributeResourceModel $customerAttributeResourceModel,
         CustomerSetupFactory $customerSetupFactory,
         SetFactory $attributeSetFactory
 
     ) {
         $this->moduleDataSetup = $moduleDataSetup;
-        $this->eavSetupFactory = $eavSetupFactory;
         $this->customerSetupFactory = $customerSetupFactory;
-        $this->eavConfig       = $eavConfig;
         $this->customerAttributeResourceModel = $customerAttributeResourceModel;
         $this->attributeSetFactory = $attributeSetFactory;
 
@@ -56,18 +52,18 @@ class AddLinkedinAttribute implements DataPatchInterface
 
     /**
      * {@inheritdoc}
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Zend_Validate_Exception
+     * @throws LocalizedException
+     * @throws Zend_Validate_Exception
      */
     public function apply()
     {
         $setup = $this->moduleDataSetup;
         $setup->startSetup();
         $customerSetup = $this->customerSetupFactory->create(['setup' => $setup]);
-        $customerSetup->removeAttribute(Customer::ENTITY, 'linkedin_url');
+        $customerSetup->removeAttribute(Customer::ENTITY, 'linkedin_profile');
         $customerSetup->addAttribute(
             Customer::ENTITY,
-            'linkedin_url',
+            'linkedin_profile',
             [
 
                 'label'                 => 'Profile Linkedin',
@@ -90,7 +86,7 @@ class AddLinkedinAttribute implements DataPatchInterface
         $attributeSet = $this->attributeSetFactory->create();
         $attributeGroupId = $attributeSet->getDefaultGroupId($attributeSetId);
 
-        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY,'linkedin_url');
+        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY,'linkedin_profile');
 
         $attribute->addData(['used_in_forms' => [
             'adminhtml_customer',

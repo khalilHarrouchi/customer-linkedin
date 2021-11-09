@@ -13,6 +13,9 @@ use Magento\Customer\Model\ResourceModel\Customer\Collection;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\Validator\Url;
 
+/**
+ * @codeCoverageIgnore
+ */
 class RestrictCustomerCreateFormUrl
 {
 
@@ -72,8 +75,8 @@ class RestrictCustomerCreateFormUrl
     )
     {
         /** @var RequestInterface $request */
-        $linkedin_url = $subject->getRequest()->getParam('linkedin_url');
-        if (!$this->urlValidator->isValid($linkedin_url)) {
+        $linkedin_profile = $subject->getRequest()->getParam('linkedin_profile');
+        if (!$this->urlValidator->isValid($linkedin_profile)) {
 
             $this->messageManager->addErrorMessage(
                 __('Please enter a correct URL value format ex:https://******')

@@ -3,18 +3,16 @@
     "description": "A Magento 2 module that creates an attribute Linkedin profile for Customer ",
     "type": "magento2-module",
     "version": "1.0.0",
-    "license": [
-        "OSL-3.0",
-        "AFL-3.0"
-    ],
+    "license": "MIT",
     "require": {
         "php": ">=7.2.0",
         "magento/framework": "*",
         "magento/module-customer": "*"
     },
-    "minimum-stability": "stable",
     "autoload": {
-        "files": [ "registration.php" ],
+        "files": [
+            "registration.php"
+        ],
         "psr-4": {
             "MagentoTest\\CustomerLinkedin\\": ""
         }
